@@ -53,7 +53,7 @@
           <tbody class="row">
             <tr ng-repeat="track in tracks | orderBy: sortType | filter: search">
               <td>
-                <img class="img-circle" src="{{track.album.images[1].url}}" ng-click="play(track.preview_url)">
+                <img ng-class="track.preview_url == currentSong ? 'current' : '' "class="img-circle" src="{{track.album.images[1].url}}" ng-click="play(track.preview_url)">
               </td>
               <td>{{track.album.name}}</td>
 
