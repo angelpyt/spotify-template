@@ -7,7 +7,7 @@ body {
 }
 
 #title {
-	font-size: 60px;
+	font-size: 30px;
 	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
 }
 
@@ -45,4 +45,14 @@ img {
 
 .modal-title, .modal-body {
 	color: black;
+}
+
+#n {
+	color: white;
+}
+
+@media only screen and (min-width : 480px) {
+	#title {
+		font-size: 60px;
+	}
 }
