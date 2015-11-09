@@ -49,6 +49,10 @@ img {
 
 #n {
 	color: white;
+  display: inline;
+}
+#play {
+  display: inline;
 }
 
 @media only screen and (min-width : 480px) {

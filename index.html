@@ -39,7 +39,7 @@
     <div ng-if="tracks">
       <div class="container">
         <p id = "n" ng-show="tracks.length>0" class="help-block">Music found: </br> Click the picture or title to play and click again to pause.</p> 
-        <span ng-show="currentSong && !audioObject.paused">(Playing)</span>
+        <span id="play" ng-show="currentSong && !audioObject.paused">(Playing)</span>
         <table class="table borderless" >
           <thead class="row">
             <tr>
