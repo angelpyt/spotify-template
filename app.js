@@ -1,4 +1,5 @@
 var data;
+var albumData;
 var baseUrl = 'https://api.spotify.com/v1/search?type=track&query='
 var myApp = angular.module('myApp', [])
 
@@ -10,6 +11,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       
     })
   }
+
   $scope.play = function(song) {
     if($scope.currentSong == song) {
       $scope.audioObject.pause()
@@ -23,9 +25,13 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
       $scope.currentSong = song
     }
   }
+
 })
 
 // Add tool tips to anything with a title property
 $('body').tooltip({
     selector: '[title]'
 });
+
+
+

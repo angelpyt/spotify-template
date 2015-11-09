@@ -1,3 +1,48 @@
 body {
   padding:10px;
+  background-image: url(../img/b.jpg);
+  background-size: 100%;
+  background-attachment:fixed;
+  color:white;
+}
+
+#title {
+	font-size: 60px;
+	font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+}
+
+
+.img {
+  margin-bottom:20px;
+  padding:10px; 
+  text-align:center;
+  box-sizing:border-box;
+}
+
+#pointer {
+	cursor: pointer;
+}
+
+img {
+  max-height:50%;
+  max-width:50%;
+  cursor:pointer;
+}
+
+
+.borderless tbody tr td, .borderless tbody tr th, .borderless thead tr th {
+    border: none;
+}
+
+.footer {
+	text-align: center;
+	position: relative;	
+}
+
+#top {
+	text-decoration: none;
+}
+
+.modal-title, .modal-body {
+	color: black;
 }

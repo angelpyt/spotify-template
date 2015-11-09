@@ -4,27 +4,30 @@
 	<meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Spotify Template</title>
+	<title>Spotify Search</title>
 	
 	<!-- Include libraries -->
 	<script src="https://code.jquery.com/jquery.min.js"></script>
 	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.2/angular.min.js"></script>
+  <link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">
 	
 	<!-- Read scripts -->
 	<script src="app.js"></script>
 	<link href="app.css" type="text/css" rel="stylesheet"/>	
+  <link rel="icon" href="img/pageicon.png"/>
 	
 </head>
 <body>
 	<!-- Initiate app -->
-	<div ng-app="myApp" ng-controller="myCtrl">
+  	<div ng-app="myApp" ng-controller="myCtrl">
 		<!-- Form -->
-		<form class="container" name="songForm">
-			<div class="form-group">
-				<label>Spotify search:</label>
-				<input name="search" placeholder="Enter your search.." ng-model="track" class="form-control"></input>
+		<form class="container" name="songForm" novalidate>
+			<div class="form-group" ng-class = "{'has-error': songForm.search.$touched && songForm.search.$invalid}">
+				<label id="title">Spotify Search</label>
+				<input name="search" placeholder="Enter your search.." ng-model="track" class="form-control" ng-minlength="3"></input>
+				<p ng-show="songForm.search.$error.minlength" class="help-block">Tell us what you are looking for.</p>
 			</div>
 			<div class="form-group">
 				<button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getSongs()" type="submit">Submit</button>
@@ -32,13 +35,54 @@
 		</form>
 		
 		<!-- Results -->
-		<div class="container-fixed">
-			<p ng-show="tracks.length>0" class="help-block">Click to sample</p>
-			<ul>
-				<li ng-repeat="track in tracks" class="" ng-click="play(track.preview_url)" title="{{track.name}}">{{track.name + ', by ' + track.artists[0].name}}</li>
-			</ul>
-		</div>
-	</div>
-	</div>
+
+    <div ng-if="tracks">
+      <div class="container">
+        <p ng-show="tracks.length>0" class="help-block">Music found: </br> Click the picture or title to play and click again to pause.</p> 
+        <!-- <span ng-show="currentSong && !audioObject.paused">(playing)</span> -->
+        <table class="table borderless" >
+          <thead class="row">
+            <tr>
+              <td></td>
+              <td>Album</td>
+              <th>Song</th>
+              <th><a href="#" ng-click="sortType='artist'">Artist</a></th>
+              <th><a href="#" ng-click="sortType='-popularity'">Popularity</a></th>
+            </tr>
+          </thead>
+          <tbody class="row">
+            <tr ng-repeat="track in tracks | orderBy: sortType | filter: search">
+              <td>
+                <img class="img-circle" src="{{track.album.images[1].url}}" ng-click="play(track.preview_url)">
+              </td>
+              <td>{{track.album.name}}</td>
+
+              <td ng-click="play(track.preview_url)" >
+                <i id="pointer" class="fa fa-play" ng-click="dontShowMe=true"></i>
+                <strong>{{track.name}}</strong>
+              </td>
+
+              <td>{{track.artists[0].name}}</td>
+
+              <td>{{track.popularity}}</td>
+            </tr>
+          </tbody>
+        </table>
+        <a href="#" id="top">
+        <i class="fa fa-arrow-up fa-2x"></i>
+        <p>Back to Top</p>
+      </a>
+      </div>
+
+	  </div>
+    <footer class="footer">
+      <div class="wrapper">
+        <i class="fa fa-copyright"> 2015 Search Music </i>
+        <p>Searching results are from
+          <a href="https://www.spotify.com/us/" title="spotity">Spotify</a>
+        </p>
+      </div>
+    </footer>
+
 </body>
 </html>
